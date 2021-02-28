@@ -1,30 +1,18 @@
-import React from 'react';
-import './App.css';
+import React,{useState} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {LocationSearch} from "./components/LocationSearch";
+import {LocationTable} from "./components/LocationTable";
+
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Weather App</h1>
-    <div>
-    <label>
-      Add Location <input type="text" value="Tokyo"/>
-    </label>
-     <button>Search</button>
-    </div>
+  const [locations,setLocations] = useState<string[]>([]);
+  const addLocation =(location:string) => setLocations([location,...locations])
 
-    <div>
-     <h2>Locations</h2>
-     <table>
-      <thead>
-       <tr>
-        <th>Name</th>
-      </tr>
-      </thead>
-     <tbody>
-       <tr><td>Paris</td></tr>
-     </tbody>
-     </table>
-    </div>
+  return (
+    <div className="container">
+       <h1>Weather App</h1>
+     <LocationSearch onSearch ={addLocation}/>
+     <LocationTable locations={locations}/>
    </div>
   );
 }
